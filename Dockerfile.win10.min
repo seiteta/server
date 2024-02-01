@@ -58,11 +58,11 @@ LABEL CMAKE_VERSION=${CMAKE_VERSION}
 
 # Be aware that pip can interact badly with VS cmd shell so need to pip install before
 # vsdevcmd.bat (see https://bugs.python.org/issue38989)
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.10.11
 ARG PYTHON_SOURCE=https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe
 ADD ${PYTHON_SOURCE} python-${PYTHON_VERSION}-amd64.exe
-RUN python-%PYTHON_VERSION%-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_doc=0 TargetDir="C:\python%PYTHON_VERSION%"
-RUN mklink "C:\python%PYTHON_VERSION%\python3.exe" "C:\python%PYTHON_VERSION%\python.exe"
+RUN python-${PYTHON_VERSION}-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_doc=0 TargetDir="C:\python${PYTHON_VERSION}"
+RUN mklink "C:\python${PYTHON_VERSION}\python3.exe" "C:\python${PYTHON_VERSION}\python.exe"
 RUN pip install --upgrade wheel setuptools docker
 RUN pip install grpcio-tools
 
